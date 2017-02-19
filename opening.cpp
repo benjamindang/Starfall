@@ -14,30 +14,33 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
 
     title = new QLabel("Starfall", this);
     title->setStyleSheet("QLabel {color : yellow; }");
-    title -> setGeometry(110,10,250,200);
-    QFont newFont("Times", 60, QFont::Cursive, true);
-    title -> setFont(newFont);
+    title -> setGeometry(100,10,250,200);
+    QFont titleFont("Times", 60, QFont::Cursive, true);
+    title -> setFont(titleFont);
 
     start_button = new QPushButton("Start",this);
+    QFont buttonFont("Times", 30, QFont::Cursive, true);
+    start_button -> setFont(buttonFont);
     start_button -> setGeometry(100,200,160,70);
-    start_button -> setStyleSheet("background-color: white;"
+    start_button -> setStyleSheet("background-color: black;"
             "border-style: outset;"
             "border-width: 2px;"
             "border-radius: 10px;"
-            "border-color: black;"
-            "font: bold 14px;"
+            "border-color: yellow;"
+            "color: yellow;"
             "min-width: 10em;"
             "padding: 6px;");
     connect(start_button, SIGNAL (released()), this, SLOT(handleStart()));
 
     info_button = new QPushButton("Info",this);
     info_button -> setGeometry(100,350,160,70);
-    info_button -> setStyleSheet("background-color: white;"
+    info_button -> setFont(buttonFont);
+    info_button -> setStyleSheet("background-color: black;"
             "border-style: outset;"
             "border-width: 2px;"
             "border-radius: 10px;"
-            "border-color: black;"
-            "font: bold 14px;"
+            "border-color: yellow;"
+            "color: yellow;"
             "min-width: 10em;"
             "padding: 6px;");
     connect(info_button, SIGNAL (released()), this, SLOT(handleInfo()));
@@ -45,24 +48,26 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
 
     exit_button = new QPushButton("Exit", this);
     exit_button -> setGeometry(100,500,160,70);
-    exit_button -> setStyleSheet("background-color: white;"
+    exit_button->setFont(buttonFont);
+    exit_button -> setStyleSheet("background-color: black;"
             "border-style: outset;"
             "border-width: 2px;"
             "border-radius: 10px;"
-            "border-color: black;"
-            "font: bold 14px;"
+            "border-color: yellow;"
+            "color: yellow;"
             "min-width: 10em;"
             "padding: 6px;");
     connect(exit_button, SIGNAL (released()), this, SLOT(handleExit()));
 
     back_button = new QPushButton("Back",this);
     back_button -> setGeometry(100,500,160,70);
-    back_button -> setStyleSheet("background-color: white;"
+    back_button -> setFont(buttonFont);
+    back_button -> setStyleSheet("background-color: black;"
             "border-style: outset;"
             "border-width: 2px;"
             "border-radius: 10px;"
-            "border-color: black;"
-            "font: bold 14px;"
+            "border-color: yellow;"
+            "color: yellow;"
             "min-width: 10em;"
             "padding: 6px;");
     back_button -> setVisible(false);
