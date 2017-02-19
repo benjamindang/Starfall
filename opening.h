@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QLabel>
+#include <QFont>
 
 class Opening : public QMainWindow
 {
@@ -15,9 +16,13 @@ private:
     QPushButton *start_button;
     QPushButton *info_button;
     QPushButton *exit_button;
-signals:
+    QPushButton *back_button;
 
-public slots:
+private slots:
+    void handleStart();
+    void handleInfo();
+    void handleExit();
+    void handleBack();
 };
 
 #endif // OPENING_H
