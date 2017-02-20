@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QFont>
+#include <QGraphicsOpacityEffect>
+#include <QPropertyAnimation>
 
 class Opening : public QMainWindow
 {
@@ -13,6 +15,7 @@ public:
     explicit Opening(QWidget *parent = 0);
 private:
     QLabel *title;
+    QLabel *description;
     QPushButton *start_button;
     QPushButton *info_button;
     QPushButton *exit_button;
