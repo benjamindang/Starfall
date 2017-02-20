@@ -123,17 +123,88 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
 }
 
 void Opening::handleStart(){
-    start_button -> setVisible(false);
+    QGraphicsOpacityEffect *title_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *title_ani_fade = new QPropertyAnimation(title_fade,"opacity");
+    title_ani_fade->setDuration(1000);
+    title_ani_fade->setStartValue(1);
+    title_ani_fade->setEndValue(0);
+    title_ani_fade->setEasingCurve(QEasingCurve::OutBack);
+    title_ani_fade->start(QPropertyAnimation::DeleteWhenStopped);
+
+    QGraphicsOpacityEffect *start_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *start_fade_ani = new QPropertyAnimation(start_fade,"opacity");
+    start_fade_ani->setDuration(1000);
+    start_fade_ani->setStartValue(1);
+    start_fade_ani->setEndValue(0);
+    start_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    start_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+    QGraphicsOpacityEffect *info_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *info_fade_ani = new QPropertyAnimation(info_fade,"opacity");
+    info_fade_ani->setDuration(1000);
+    info_fade_ani->setStartValue(1);
+    info_fade_ani->setEndValue(0);
+    info_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    info_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+    QGraphicsOpacityEffect *exit_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *exit_fade_ani = new QPropertyAnimation(exit_fade,"opacity");
+    exit_fade_ani->setDuration(1000);
+    exit_fade_ani->setStartValue(1);
+    exit_fade_ani->setEndValue(0);
+    exit_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    exit_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+
+    title -> setGraphicsEffect(title_fade);
+    start_button -> setGraphicsEffect(start_fade);
+    info_button -> setGraphicsEffect(info_fade);
+    exit_button -> setGraphicsEffect(exit_fade);
+
+    title ->setVisible(false);
+    start_button ->setVisible(false);
     info_button -> setVisible(false);
     exit_button -> setVisible(false);
-    title -> setVisible(false);
 }
 
 void Opening::handleInfo(){
-    start_button -> setVisible(false);
-    info_button -> setVisible(false);
-    exit_button -> setVisible(false);
-    title -> setVisible(false);
+    QGraphicsOpacityEffect *title_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *title_ani_fade = new QPropertyAnimation(title_fade,"opacity");
+    title_ani_fade->setDuration(1000);
+    title_ani_fade->setStartValue(1);
+    title_ani_fade->setEndValue(0);
+    title_ani_fade->setEasingCurve(QEasingCurve::OutBack);
+    title_ani_fade->start(QPropertyAnimation::DeleteWhenStopped);
+
+    QGraphicsOpacityEffect *start_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *start_fade_ani = new QPropertyAnimation(start_fade,"opacity");
+    start_fade_ani->setDuration(1000);
+    start_fade_ani->setStartValue(1);
+    start_fade_ani->setEndValue(0);
+    start_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    start_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+    QGraphicsOpacityEffect *info_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *info_fade_ani = new QPropertyAnimation(info_fade,"opacity");
+    info_fade_ani->setDuration(1000);
+    info_fade_ani->setStartValue(1);
+    info_fade_ani->setEndValue(0);
+    info_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    info_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+    QGraphicsOpacityEffect *exit_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *exit_fade_ani = new QPropertyAnimation(exit_fade,"opacity");
+    exit_fade_ani->setDuration(1000);
+    exit_fade_ani->setStartValue(1);
+    exit_fade_ani->setEndValue(0);
+    exit_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    exit_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+
+    title -> setGraphicsEffect(title_fade);
+    start_button -> setGraphicsEffect(start_fade);
+    info_button -> setGraphicsEffect(info_fade);
+    exit_button -> setGraphicsEffect(exit_fade);
 
     QGraphicsOpacityEffect *back_eff = new QGraphicsOpacityEffect(this);
     QPropertyAnimation *back_ani = new QPropertyAnimation(back_eff,"opacity");
@@ -195,14 +266,29 @@ void Opening::handleBack(){
     exit_ani->setEasingCurve(QEasingCurve::InBack);
     exit_ani->start(QPropertyAnimation::DeleteWhenStopped);
 
+    QGraphicsOpacityEffect *description_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *description_fade_ani = new QPropertyAnimation(description_fade,"opacity");
+    description_fade_ani->setDuration(1000);
+    description_fade_ani->setStartValue(1);
+    description_fade_ani->setEndValue(0);
+    description_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    description_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+    QGraphicsOpacityEffect *back_fade = new QGraphicsOpacityEffect(this);
+    QPropertyAnimation *back_fade_ani = new QPropertyAnimation(back_fade,"opacity");
+    back_fade_ani->setDuration(1000);
+    back_fade_ani->setStartValue(1);
+    back_fade_ani->setEndValue(0);
+    back_fade_ani->setEasingCurve(QEasingCurve::OutBack);
+    back_fade_ani->start(QPropertyAnimation::DeleteWhenStopped);
+
+    description -> setGraphicsEffect(description_fade);
+    back_button -> setGraphicsEffect(back_fade);
     title -> setGraphicsEffect(title_eff);
     start_button ->setGraphicsEffect(start_eff);
     info_button -> setGraphicsEffect(info_eff);
     exit_button -> setGraphicsEffect(exit_eff);
-    title -> setVisible(true);
-    start_button -> setVisible(true);
-    info_button -> setVisible(true);
-    exit_button -> setVisible(true);
-    back_button -> setVisible(false);
     description -> setVisible(false);
+    back_button -> setVisible(false);
+
 }
