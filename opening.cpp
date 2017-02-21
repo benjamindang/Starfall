@@ -5,7 +5,9 @@
 #include <QGraphicsOpacityEffect>
 #include <QPropertyAnimation>
 #include <QThread>
+#include <QGraphicsView>
 #include "opening.h"
+#include "gamescene.h"
 
 Opening::Opening(QWidget *parent) : QMainWindow(parent)
 {
@@ -70,6 +72,11 @@ void Opening::handleStart(){
     fade_out_effect(exit_button, 1000);
     delay();
     hide_all();
+    gameScene* game = new gameScene(this);
+    QGraphicsView *view = new QGraphicsView(this);
+    view->setScene(game);
+    this -> setCentralWidget(view);
+
 }
 
 void Opening::handleInfo(){
