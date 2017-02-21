@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = Baloons
+TARGET = Starfall
 
 QT = core gui widgets
 

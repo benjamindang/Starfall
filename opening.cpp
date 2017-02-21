@@ -26,56 +26,28 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
     QFont buttonFont("Times", 30, QFont::Cursive, true);
     start_button -> setFont(buttonFont);
     start_button -> setGeometry(100,200,160,70);
-    start_button -> setStyleSheet("background-color: black;"
-            "border-style: outset;"
-            "border-width: 2px;"
-            "border-radius: 10px;"
-            "border-color: yellow;"
-            "color: yellow;"
-            "min-width: 10em;"
-            "padding: 6px;");
+    style_button(start_button);
     fade_in_effect(start_button, 2000);
     connect(start_button, SIGNAL (released()), this, SLOT(handleStart()));
 
     info_button = new QPushButton("Info",this);
     info_button -> setGeometry(100,350,160,70);
     info_button -> setFont(buttonFont);
-    info_button -> setStyleSheet("background-color: black;"
-            "border-style: outset;"
-            "border-width: 2px;"
-            "border-radius: 10px;"
-            "border-color: yellow;"
-            "color: yellow;"
-            "min-width: 10em;"
-            "padding: 6px;");
+    style_button(info_button);
     fade_in_effect(info_button, 3000);
     connect(info_button, SIGNAL (released()), this, SLOT(handleInfo()));
 
     exit_button = new QPushButton("Exit", this);
     exit_button -> setGeometry(100,500,160,70);
     exit_button->setFont(buttonFont);
-    exit_button -> setStyleSheet("background-color: black;"
-            "border-style: outset;"
-            "border-width: 2px;"
-            "border-radius: 10px;"
-            "border-color: yellow;"
-            "color: yellow;"
-            "min-width: 10em;"
-            "padding: 6px;");
+    style_button(exit_button);
     fade_in_effect(exit_button, 4000);
     connect(exit_button, SIGNAL (released()), this, SLOT(handleExit()));
 
     back_button = new QPushButton("Back",this);
     back_button -> setGeometry(100,500,160,70);
     back_button -> setFont(buttonFont);
-    back_button -> setStyleSheet("background-color: black;"
-            "border-style: outset;"
-            "border-width: 2px;"
-            "border-radius: 10px;"
-            "border-color: yellow;"
-            "color: yellow;"
-            "min-width: 10em;"
-            "padding: 6px;");
+    style_button(back_button);
     back_button -> setVisible(false);
     connect(back_button, SIGNAL (released()), this, SLOT(handleBack()));
 
@@ -164,3 +136,15 @@ void Opening::delay(){
     while (QTime::currentTime() < endTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
+
+void Opening::style_button(QPushButton* w){
+    w -> setStyleSheet("background-color: black;"
+            "border-style: outset;"
+            "border-width: 2px;"
+            "border-radius: 10px;"
+            "border-color: yellow;"
+            "color: yellow;"
+            "min-width: 10em;"
+            "padding: 6px;");
+}
+

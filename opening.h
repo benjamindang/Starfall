@@ -9,6 +9,7 @@
 #include <QPropertyAnimation>
 #include <QTime>
 #include <QCoreApplication>
+#include <QGraphicsScene>
 
 class Opening : public QMainWindow
 {
@@ -17,6 +18,7 @@ public:
     explicit Opening(QWidget *parent = 0);
     void fade_in_effect(QWidget* w,int duration);
     void fade_out_effect(QWidget* w, int duration);
+    void style_button(QPushButton* w);
     void hide_all();
     void delay();
 private:
@@ -26,6 +28,7 @@ private:
     QPushButton *info_button;
     QPushButton *exit_button;
     QPushButton *back_button;
+    QGraphicsScene *game_scene;
 
 private slots:
     void handleStart();
