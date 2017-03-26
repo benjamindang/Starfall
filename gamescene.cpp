@@ -13,17 +13,32 @@ gameScene::gameScene(QWidget* parentWidget) : QGraphicsScene(parentWidget)
 {
     this -> setSceneRect(0,0,400,600);
     this -> setBackgroundBrush(Qt::black);
-    QPen test;
-    test.setColor(Qt::yellow);
-    test.setWidth(3);
-   QGraphicsLineItem* bottom_line = this -> addLine(0,450,400,450,test);
+    QPen yellow;
+    yellow.setColor(Qt::yellow);
+    yellow.setWidth(3);
+   QGraphicsLineItem* bottom_line = this -> addLine(0,450,400,450,yellow);
 
-   QTimer* timer = new QTimer();
-   connect(timer,SIGNAL(timeout()),SLOT(spawn()));
-   timer->start(2000);
+   initial_rate = 1000;
+   QTimer* rate = new QTimer();
+   connect(rate,SIGNAL(timeout()),SLOT(spawn_timer()));
+   rate->start(3000);
+
+   QTimer* spawn_rate = new QTimer(this);
+   connect(spawn_rate,SIGNAL(timeout()),SLOT(spawn()));
+   spawn_rate->start(initial_rate);
+
+
 }
 
 void gameScene::spawn(){
-    Star* star  = new Star();
+    Star* star  = new Star(this);
     this ->addWidget(star);
+    QObject* test = sender();
+    QTimer* tester = qobject_cast<QTimer*>(test);
+    tester -> setInterval(initial_rate);
 }
+
+void gameScene::spawn_timer(){
+    initial_rate -= 10;
+}
+

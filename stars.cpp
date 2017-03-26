@@ -2,11 +2,13 @@
 #include <QGraphicsScene>
 #include <QTimer>
 #include <stdlib.h>
+#include <QtAlgorithms>
+#include "gamescene.h"
 
-
-Star::Star(QMainWindow* parent):QPushButton(parent){
+Star::Star(QGraphicsScene* scene):QPushButton(), parentscene(scene){
     int randomX = (rand() % 399) + 1;
     this -> style_button();
+
     this->setGeometry(randomX,0,10,10);
 
     connect(this,SIGNAL(pressed()),this,SLOT(clickedOn()));
@@ -23,7 +25,9 @@ void Star::move(){
         if(!(this->isVisible()))
             delete this;
         else{
-
+            parentscene ->clear();
+            qDeleteAll(parentscene->items());
+            delete parentscene;
         }
     }
 }
@@ -36,6 +40,9 @@ void Star::style_button(){
     this -> setStyleSheet("background-color: yellow;"
             "min-width: 0em;"
             "min-height: 0em;"
+            "border-color: yellow;"
+            "border-style: outset;"
+            "border-width: 2px;"
                           );
 }
 

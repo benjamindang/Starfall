@@ -12,6 +12,9 @@ public:
      gameScene(QWidget* parentWidget = 0);
 public slots:
      void spawn();
+     void spawn_timer();
+private:
+     int initial_rate;
 };
 
 #endif // GAMESCENE_H
