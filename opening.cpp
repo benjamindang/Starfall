@@ -11,20 +11,20 @@
 
 Opening::Opening(QWidget *parent) : QMainWindow(parent)
 {
-    setFixedSize(400,600);
+    setFixedSize(400,600);                                 //Set size for intro screen window(also window for game) and background color
     QPalette background = palette();
     background.setColor(QPalette::Background, Qt::black);
     this->setAutoFillBackground(true);
     this->setPalette(background);
 
-    title = new QLabel("Starfall", this);
+    title = new QLabel("Starfall", this);                   //Create label for title, setting style and font
     title->setStyleSheet("QLabel {color : yellow; }");
     title -> setGeometry(100,10,250,200);
     QFont titleFont("Times", 60, QFont::Cursive, true);
     title -> setFont(titleFont);
     fade_in_effect(title,1000);
 
-    start_button = new QPushButton("Start",this);
+    start_button = new QPushButton("Start",this);           //Create pushbutton for start button, setting style and font
     QFont buttonFont("Times", 30, QFont::Cursive, true);
     start_button -> setFont(buttonFont);
     start_button -> setGeometry(100,200,160,70);
@@ -32,28 +32,28 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
     fade_in_effect(start_button, 2000);
     connect(start_button, SIGNAL (released()), this, SLOT(handleStart()));
 
-    info_button = new QPushButton("Info",this);
+    info_button = new QPushButton("Info",this);             //Create PushButton for Info button, setting style and font
     info_button -> setGeometry(100,350,160,70);
     info_button -> setFont(buttonFont);
     style_button(info_button);
     fade_in_effect(info_button, 3000);
     connect(info_button, SIGNAL (released()), this, SLOT(handleInfo()));
 
-    exit_button = new QPushButton("Exit", this);
+    exit_button = new QPushButton("Exit", this);            //Create PushButton for Exit button, setting style and font
     exit_button -> setGeometry(100,500,160,70);
     exit_button->setFont(buttonFont);
     style_button(exit_button);
     fade_in_effect(exit_button, 4000);
     connect(exit_button, SIGNAL (released()), this, SLOT(handleExit()));
 
-    back_button = new QPushButton("Back",this);
+    back_button = new QPushButton("Back",this);             //Create PushButton for Back button on info page, setting style and font
     back_button -> setGeometry(100,500,160,70);
     back_button -> setFont(buttonFont);
     style_button(back_button);
     back_button -> setVisible(false);
     connect(back_button, SIGNAL (released()), this, SLOT(handleBack()));
 
-    description = new QLabel("Hello,welcome to Starfall. \n"
+    description = new QLabel("Hello,welcome to Starfall. \n"                        //Create Label for description/how to play game on info page
                              "Click all the stars before they hit the bottom! \n"
                              "But be careful, dont click other objects!", this);
     description->setStyleSheet("QLabel {color : yellow; }");
@@ -64,7 +64,7 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
 
 }
 
-void Opening::handleStart(){
+void Opening::handleStart(){                //
 
     fade_out_effect(title, 1000);
     fade_out_effect(start_button, 1000);
