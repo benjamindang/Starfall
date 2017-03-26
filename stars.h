@@ -7,17 +7,19 @@
 #include<QMainWindow>
 #include "gamescene.h"
 
+class gameScene;
+
 class Star :public QPushButton
 {
     Q_OBJECT
 public:
-    Star(QGraphicsScene* scene);
+    Star(gameScene* scene);
     void style_button();
 public slots:
     void move();
     void clickedOn();
 private:
-    QGraphicsScene* parentscene;
+    gameScene* parentscene;
 };
 
 #endif // STARS_H

@@ -6,24 +6,25 @@
 #include <QPen>
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
+#include <QGraphicsProxyWidget>
 #include <QTimer>
 #include "stars.h"
 
-gameScene::gameScene(QWidget* parentWidget) : QGraphicsScene(parentWidget)
+gameScene::gameScene(Opening* window) : QGraphicsScene(), parentWindow(window)
 {
     this -> setSceneRect(0,0,400,600);
     this -> setBackgroundBrush(Qt::black);
     QPen yellow;
     yellow.setColor(Qt::yellow);
     yellow.setWidth(3);
-   QGraphicsLineItem* bottom_line = this -> addLine(0,450,400,450,yellow);
+   bottom_line = this -> addLine(0,450,400,450,yellow);
 
    initial_rate = 1000;
-   QTimer* rate = new QTimer();
+   rate = new QTimer();
    connect(rate,SIGNAL(timeout()),SLOT(spawn_timer()));
    rate->start(3000);
 
-   QTimer* spawn_rate = new QTimer(this);
+   spawn_rate = new QTimer(this);
    connect(spawn_rate,SIGNAL(timeout()),SLOT(spawn()));
    spawn_rate->start(initial_rate);
 
@@ -32,13 +33,21 @@ gameScene::gameScene(QWidget* parentWidget) : QGraphicsScene(parentWidget)
 
 void gameScene::spawn(){
     Star* star  = new Star(this);
-    this ->addWidget(star);
-    QObject* test = sender();
-    QTimer* tester = qobject_cast<QTimer*>(test);
-    tester -> setInterval(initial_rate);
+    QGraphicsProxyWidget* star2 = this->addWidget(star);
+    QObject* timesend = sender();
+    QTimer* timersend = qobject_cast<QTimer*>(timesend);
+    timersend -> setInterval(initial_rate);
 }
 
 void gameScene::spawn_timer(){
     initial_rate -= 10;
 }
 
+Opening* gameScene::get_parent(){
+    return parentWindow;
+}
+
+void gameScene::stoptimers(){
+    rate->stop();
+    spawn_rate->stop();
+}

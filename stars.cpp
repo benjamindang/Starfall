@@ -1,12 +1,13 @@
 #include "stars.h"
 #include <QGraphicsScene>
 #include <QTimer>
+#include <ctime>
 #include <stdlib.h>
-#include <QtAlgorithms>
+#include <QGraphicsProxyWidget>
 #include "gamescene.h"
 
-Star::Star(QGraphicsScene* scene):QPushButton(), parentscene(scene){
-    int randomX = (rand() % 399) + 1;
+Star::Star(gameScene* scene):QPushButton(), parentscene(scene){
+    int randomX = (rand() % 391) + 5;
     this -> style_button();
 
     this->setGeometry(randomX,0,10,10);
@@ -22,12 +23,14 @@ Star::Star(QGraphicsScene* scene):QPushButton(), parentscene(scene){
 void Star::move(){
     this->setGeometry(x(),y() + 1,10,10);
     if(pos().y() + rect().height() > 448){
-        if(!(this->isVisible()))
+        if(!(this->isVisible())){
+            this->setVisible(false);
             delete this;
+        }
         else{
-            parentscene ->clear();
-            qDeleteAll(parentscene->items());
-            delete parentscene;
+            parentscene -> get_parent() -> reset();
+            parentscene -> stoptimers();
+            parentscene -> clear();
         }
     }
 }

@@ -64,7 +64,7 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
 
 }
 
-void Opening::handleStart(){                //
+void Opening::handleStart(){
 
     fade_out_effect(title, 1000);
     fade_out_effect(start_button, 1000);
@@ -72,10 +72,10 @@ void Opening::handleStart(){                //
     fade_out_effect(exit_button, 1000);
     delay();
     hide_all();
-    gameScene* game = new gameScene(this);
-    QGraphicsView *view = new QGraphicsView(this);
-    view->setScene(game);
-    this -> setCentralWidget(view);
+    game_scene = new gameScene(this);
+    game_view = new QGraphicsView(this);
+    game_view->setScene(game_scene);
+    this -> setCentralWidget(game_view);
 
 }
 
@@ -138,6 +138,17 @@ void Opening::hide_all(){
     exit_button -> setVisible(false);
 }
 
+void Opening::show_all(){
+    fade_in_effect(title, 1000);
+    fade_in_effect(start_button, 2000);
+    fade_in_effect(info_button, 3000);
+    fade_in_effect(exit_button, 4000);
+    title ->setVisible(true);
+    start_button ->setVisible(true);
+    info_button -> setVisible(true);
+    exit_button -> setVisible(true);
+}
+
 void Opening::delay(){
     QTime endTime= QTime::currentTime().addSecs(1);
     while (QTime::currentTime() < endTime)
@@ -155,3 +166,11 @@ void Opening::style_button(QPushButton* w){
             "padding: 6px;");
 }
 
+void Opening::reset(){
+    this->setCentralWidget(0);
+    this->show_all();
+}
+
+QGraphicsView* Opening::get_view(){
+    return game_view;
+}
