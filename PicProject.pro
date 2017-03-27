@@ -9,11 +9,13 @@ SOURCES += \
     main.cpp \
     opening.cpp \
     gamescene.cpp \
-    stars.cpp
+    stars.cpp \
+    score.cpp
 
 HEADERS += \
     opening.h \
     gamescene.h \
-    stars.h
+    stars.h \
+    score.h
 
 RESOURCES +=

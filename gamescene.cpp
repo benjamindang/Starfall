@@ -7,8 +7,11 @@
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
 #include <QGraphicsProxyWidget>
+#include <QGraphicsTextItem>
 #include <QTimer>
+#include <QFont>
 #include "stars.h"
+#include "score.h"
 
 gameScene::gameScene(Opening* window) : QGraphicsScene(), parentWindow(window)
 {
@@ -19,6 +22,9 @@ gameScene::gameScene(Opening* window) : QGraphicsScene(), parentWindow(window)
     yellow.setWidth(3);
    bottom_line = this -> addLine(0,450,400,450,yellow);
 
+   score = new Score();
+   this-> addItem(score);
+
    initial_rate = 1000;
    rate = new QTimer();
    connect(rate,SIGNAL(timeout()),SLOT(spawn_timer()));
@@ -27,7 +33,6 @@ gameScene::gameScene(Opening* window) : QGraphicsScene(), parentWindow(window)
    spawn_rate = new QTimer(this);
    connect(spawn_rate,SIGNAL(timeout()),SLOT(spawn()));
    spawn_rate->start(initial_rate);
-
 
 }
 
@@ -43,6 +48,7 @@ void gameScene::spawn_timer(){
     initial_rate -= 10;
 }
 
+
 Opening* gameScene::get_parent(){
     return parentWindow;
 }
@@ -50,4 +56,8 @@ Opening* gameScene::get_parent(){
 void gameScene::stoptimers(){
     rate->stop();
     spawn_rate->stop();
+}
+
+Score* gameScene::get_score(){
+    return score;
 }

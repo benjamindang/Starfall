@@ -53,6 +53,19 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
     back_button -> setVisible(false);
     connect(back_button, SIGNAL (released()), this, SLOT(handleBack()));
 
+    game_over = new QLabel("Game Over!", this);
+    game_over ->setVisible(false);
+    game_over -> setStyleSheet("QLabel {color : yellow;}");
+    game_over -> setGeometry(50,10,300,200);
+    game_over -> setFont(titleFont);
+
+    play_again = new QPushButton("Play again?",this);             //Create PushButton for Back button on info page, setting style and font
+    play_again -> setGeometry(100,350,160,70);
+    play_again -> setFont(buttonFont);
+    style_button(play_again);
+    play_again -> setVisible(false);
+    connect(play_again, SIGNAL (released()), this, SLOT(handlePlay()));
+
     description = new QLabel("Hello,welcome to Starfall. \n"                        //Create Label for description/how to play game on info page
                              "Click all the stars before they hit the bottom! \n"
                              "But be careful, dont click other objects!", this);
@@ -109,6 +122,21 @@ void Opening::handleBack(){
 
 }
 
+void Opening::handlePlay(){
+    fade_out_effect(game_over, 1000);
+    fade_out_effect(play_again, 1000);
+    fade_out_effect(exit_button, 1000);
+    delay();
+    game_over -> setVisible(false);
+    play_again -> setVisible(false);
+    exit_button -> setVisible(false);
+    game_scene = new gameScene(this);
+    game_view = new QGraphicsView(this);
+    game_view->setScene(game_scene);
+    this -> setCentralWidget(game_view);
+
+}
+
 void Opening::fade_in_effect(QWidget *w, int duration){
     QGraphicsOpacityEffect *eff = new QGraphicsOpacityEffect(this);
     QPropertyAnimation *ani = new QPropertyAnimation(eff,"opacity");
@@ -139,13 +167,11 @@ void Opening::hide_all(){
 }
 
 void Opening::show_all(){
-    fade_in_effect(title, 1000);
-    fade_in_effect(start_button, 2000);
-    fade_in_effect(info_button, 3000);
-    fade_in_effect(exit_button, 4000);
-    title ->setVisible(true);
-    start_button ->setVisible(true);
-    info_button -> setVisible(true);
+    fade_in_effect(game_over, 1000);
+    fade_in_effect(play_again, 2000);
+    fade_in_effect(exit_button, 3000);
+    game_over ->setVisible(true);
+    play_again ->setVisible(true);
     exit_button -> setVisible(true);
 }
 

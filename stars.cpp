@@ -36,6 +36,7 @@ void Star::move(){
 }
 
 void Star::clickedOn(){
+    parentscene -> get_score() -> add();
     this->setVisible(false);
 }
 

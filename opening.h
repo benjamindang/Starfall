@@ -32,14 +32,17 @@ private:
     QPushButton *info_button;
     QPushButton *exit_button;
     QPushButton *back_button;
-    QGraphicsScene* game_scene;
-    QGraphicsView* game_view;
+    QGraphicsScene *game_scene;
+    QGraphicsView *game_view;
+    QLabel *game_over;
+    QPushButton *play_again;
 
 private slots:
     void handleStart();
     void handleInfo();
     void handleExit();
     void handleBack();
+    void handlePlay();
 };
 
 #endif // OPENING_H
