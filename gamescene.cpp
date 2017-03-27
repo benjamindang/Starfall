@@ -28,7 +28,7 @@ gameScene::gameScene(Opening* window) : QGraphicsScene(), parentWindow(window)
    initial_rate = 1000;
    rate = new QTimer();
    connect(rate,SIGNAL(timeout()),SLOT(spawn_timer()));
-   rate->start(3000);
+   rate->start(1000);
 
    spawn_rate = new QTimer(this);
    connect(spawn_rate,SIGNAL(timeout()),SLOT(spawn()));
@@ -45,7 +45,8 @@ void gameScene::spawn(){
 }
 
 void gameScene::spawn_timer(){
-    initial_rate -= 10;
+    if(initial_rate > 100)
+        initial_rate -= 10;
 }
 
 

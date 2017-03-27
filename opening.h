@@ -36,6 +36,7 @@ private:
     QGraphicsView *game_view;
     QLabel *game_over;
     QPushButton *play_again;
+    QLabel *score_label;
 
 private slots:
     void handleStart();

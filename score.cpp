@@ -1,9 +1,11 @@
 #include "score.h"
 #include<QFont>
 
+extern int globalscore;
+
 Score::Score(QGraphicsItem* parent) : QGraphicsTextItem(parent){
-    points = 0;
-    setPlainText(QString("Score: ") + QString::number(points));
+    globalscore = 0;
+    setPlainText(QString("Score: ") + QString::number(globalscore));
     QFont font("Times", 30, QFont::Cursive, true);
     setFont(font);
     setDefaultTextColor(Qt::yellow);
@@ -12,10 +14,7 @@ Score::Score(QGraphicsItem* parent) : QGraphicsTextItem(parent){
 }
 
 void Score::add(){
-    points++;
-    setPlainText(QString("Score: ") + QString::number(points));
+    globalscore++;
+    setPlainText(QString("Score: ") + QString::number(globalscore));
 }
 
-int Score::get_points(){
-    return points;
-}

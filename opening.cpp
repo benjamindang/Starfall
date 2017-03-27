@@ -9,6 +9,8 @@
 #include "opening.h"
 #include "gamescene.h"
 
+extern int globalscore;
+
 Opening::Opening(QWidget *parent) : QMainWindow(parent)
 {
     setFixedSize(400,600);                                 //Set size for intro screen window(also window for game) and background color
@@ -65,6 +67,13 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
     style_button(play_again);
     play_again -> setVisible(false);
     connect(play_again, SIGNAL (released()), this, SLOT(handlePlay()));
+
+    score_label = new QLabel(this);
+    score_label -> setText(QString("Score: ") + QString::number(globalscore));
+    score_label->setStyleSheet("QLabel {color : yellow; }");
+    score_label -> setGeometry(133,120,250,200);
+    score_label -> setFont(buttonFont);
+    score_label -> setVisible(false);
 
     description = new QLabel("Hello,welcome to Starfall. \n"                        //Create Label for description/how to play game on info page
                              "Click all the stars before they hit the bottom! \n"
@@ -126,10 +135,12 @@ void Opening::handlePlay(){
     fade_out_effect(game_over, 1000);
     fade_out_effect(play_again, 1000);
     fade_out_effect(exit_button, 1000);
+    fade_out_effect(score_label, 1000);
     delay();
     game_over -> setVisible(false);
     play_again -> setVisible(false);
     exit_button -> setVisible(false);
+    score_label -> setVisible(false);
     game_scene = new gameScene(this);
     game_view = new QGraphicsView(this);
     game_view->setScene(game_scene);
@@ -167,12 +178,15 @@ void Opening::hide_all(){
 }
 
 void Opening::show_all(){
+    score_label -> setText(QString("Score: ") + QString::number(globalscore));
     fade_in_effect(game_over, 1000);
-    fade_in_effect(play_again, 2000);
-    fade_in_effect(exit_button, 3000);
+    fade_in_effect(play_again, 3000);
+    fade_in_effect(exit_button, 4000);
+    fade_in_effect(score_label, 2000);
     game_over ->setVisible(true);
     play_again ->setVisible(true);
     exit_button -> setVisible(true);
+    score_label -> setVisible(true);
 }
 
 void Opening::delay(){

@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include "opening.h"
 
+int globalscore;
+
 int main(int argc, char **argv)
 {
     srand(time(NULL));
