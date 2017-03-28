@@ -1,18 +1,20 @@
 #include "stars.h"
 #include <QGraphicsScene>
 #include <QTimer>
+#include <QList>
 #include <ctime>
 #include <stdlib.h>
 #include <QGraphicsProxyWidget>
 #include "gamescene.h"
 
-Star::Star(gameScene* scene):QPushButton(), parentscene(scene){
+Star::Star(gameScene* scene,QGraphicsItem* parent):QObject(),QGraphicsPixmapItem(parent), parentscene(scene){
     int randomX = (rand() % 391) + 5;
-    this -> style_button();
+    QPixmap star(":/Pictures/Star.png");
+    star = star.scaled(30,30,Qt::IgnoreAspectRatio,Qt::FastTransformation);
+    this->setPixmap(star);
 
-    this->setGeometry(randomX,0,10,10);
-
-    connect(this,SIGNAL(pressed()),this,SLOT(clickedOn()));
+    this->setX(randomX);
+    this->setY(0);
 
     QTimer* time = new QTimer(this);
     connect(time,SIGNAL(timeout()),this,SLOT(move()));
@@ -21,32 +23,16 @@ Star::Star(gameScene* scene):QPushButton(), parentscene(scene){
 }
 
 void Star::move(){
-    this->setGeometry(x(),y() + 1,10,10);
-    if(pos().y() + rect().height() > 448){
-        if(!(this->isVisible())){
-            this->setVisible(false);
-            delete this;
-        }
-        else{
-            parentscene -> get_parent() -> reset();
-            parentscene -> stoptimers();
-            parentscene -> clear();
-        }
+    this->setY(y() + 3);
+    QList<QGraphicsItem*> colliding_items = collidingItems();
+    if(colliding_items.size() >= 1){
+        parentscene -> get_parent() -> reset();
+        parentscene -> stoptimers();
+        parentscene -> clear();
     }
-}
-
-void Star::clickedOn(){
-    parentscene -> get_score() -> add();
-    this->setVisible(false);
-}
-
-void Star::style_button(){
-    this -> setStyleSheet("background-color: yellow;"
-            "min-width: 0em;"
-            "min-height: 0em;"
-            "border-color: yellow;"
-            "border-style: outset;"
-            "border-width: 2px;"
-                          );
+    else if(pos().y() > 448){
+        parentscene->get_score()->add();
+        delete this;
+    }
 }
 

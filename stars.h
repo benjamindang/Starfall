@@ -1,23 +1,19 @@
 #ifndef STARS_H
 #define STARS_H
 
-#include<QPushButton>
-#include<QGraphicsScene>
-#include<QObject>
-#include<QMainWindow>
+#include<QGraphicsItem>
+#include<QGraphicsPixmapItem>
 #include "gamescene.h"
 
 class gameScene;
 
-class Star :public QPushButton
+class Star :public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Star(gameScene* scene);
-    void style_button();
+    Star(gameScene* scene,QGraphicsItem* parent = 0);
 public slots:
     void move();
-    void clickedOn();
 private:
     gameScene* parentscene;
 };

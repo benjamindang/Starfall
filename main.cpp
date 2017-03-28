@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include "opening.h"
+#include "player.h"
 
 int globalscore;
 
@@ -13,6 +14,5 @@ int main(int argc, char **argv)
     QApplication app (argc,argv);
     Opening window;
     window.show();
-
     return app.exec();
 }

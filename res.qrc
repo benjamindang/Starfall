@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Pictures">
+        <file>SpaceShip.png</file>
+        <file>Star.png</file>
+    </qresource>
+</RCC>

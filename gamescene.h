@@ -8,6 +8,7 @@
 #include "stars.h"
 #include "opening.h"
 #include "score.h"
+#include "player.h"
 
 class Opening;
 class Star;
@@ -23,6 +24,7 @@ public slots:
      void spawn_timer();
      Opening* get_parent();
      Score* get_score();
+     Player* get_player();
      void stoptimers();
 private:
      int points;
@@ -32,6 +34,7 @@ private:
      QTimer* spawn_rate;
      QGraphicsLineItem* bottom_line;
      Score* score;
+     Player* play;
 };
 
 #endif // GAMESCENE_H

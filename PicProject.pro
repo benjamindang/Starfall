@@ -10,12 +10,15 @@ SOURCES += \
     opening.cpp \
     gamescene.cpp \
     stars.cpp \
-    score.cpp
+    score.cpp \
+    player.cpp
 
 HEADERS += \
     opening.h \
     gamescene.h \
     stars.h \
-    score.h
+    score.h \
+    player.h
 
-RESOURCES +=
+RESOURCES += \
+    res.qrc

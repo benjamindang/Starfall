@@ -1,9 +1,8 @@
 #include "gamescene.h"
 #include <QGraphicsView>
-#include <QRectF>
-#include <QPainter>
 #include <QBrush>
 #include <QPen>
+#include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
 #include <QGraphicsProxyWidget>
@@ -12,20 +11,20 @@
 #include <QFont>
 #include "stars.h"
 #include "score.h"
+#include "player.h"
 
 gameScene::gameScene(Opening* window) : QGraphicsScene(), parentWindow(window)
 {
     this -> setSceneRect(0,0,400,600);
     this -> setBackgroundBrush(Qt::black);
-    QPen yellow;
-    yellow.setColor(Qt::yellow);
-    yellow.setWidth(3);
-   bottom_line = this -> addLine(0,450,400,450,yellow);
+
+    play = new Player();
+    this->addItem(play);
 
    score = new Score();
    this-> addItem(score);
 
-   initial_rate = 1000;
+   initial_rate = 500;
    rate = new QTimer();
    connect(rate,SIGNAL(timeout()),SLOT(spawn_timer()));
    rate->start(1000);
@@ -33,15 +32,17 @@ gameScene::gameScene(Opening* window) : QGraphicsScene(), parentWindow(window)
    spawn_rate = new QTimer(this);
    connect(spawn_rate,SIGNAL(timeout()),SLOT(spawn()));
    spawn_rate->start(initial_rate);
+   play->setFocus();
 
 }
 
 void gameScene::spawn(){
     Star* star  = new Star(this);
-    QGraphicsProxyWidget* star2 = this->addWidget(star);
+    this->addItem(star);
     QObject* timesend = sender();
     QTimer* timersend = qobject_cast<QTimer*>(timesend);
     timersend -> setInterval(initial_rate);
+    play->setFocus();
 }
 
 void gameScene::spawn_timer(){
@@ -61,4 +62,8 @@ void gameScene::stoptimers(){
 
 Score* gameScene::get_score(){
     return score;
+}
+
+Player* gameScene::get_player(){
+    return play;
 }

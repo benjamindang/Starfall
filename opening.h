@@ -10,7 +10,9 @@
 #include <QTime>
 #include <QCoreApplication>
 #include <QGraphicsScene>
+#include <gamescene.h>
 
+class gameScene;
 
 class Opening : public QMainWindow
 {
@@ -25,6 +27,7 @@ public:
     void delay();
     void reset();
     QGraphicsView* get_view();
+    gameScene* get_scene();
 private:
     QLabel *title;
     QLabel *description;
@@ -32,12 +35,11 @@ private:
     QPushButton *info_button;
     QPushButton *exit_button;
     QPushButton *back_button;
-    QGraphicsScene *game_scene;
+    gameScene *game_scene;
     QGraphicsView *game_view;
     QLabel *game_over;
     QPushButton *play_again;
     QLabel *score_label;
-
 private slots:
     void handleStart();
     void handleInfo();

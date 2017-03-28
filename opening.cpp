@@ -34,7 +34,7 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
     fade_in_effect(start_button, 2000);
     connect(start_button, SIGNAL (released()), this, SLOT(handleStart()));
 
-    info_button = new QPushButton("Info",this);             //Create PushButton for Info button, setting style and font
+    info_button = new QPushButton("How to Play",this);             //Create PushButton for Info button, setting style and font
     info_button -> setGeometry(100,350,160,70);
     info_button -> setFont(buttonFont);
     style_button(info_button);
@@ -76,8 +76,8 @@ Opening::Opening(QWidget *parent) : QMainWindow(parent)
     score_label -> setVisible(false);
 
     description = new QLabel("Hello,welcome to Starfall. \n"                        //Create Label for description/how to play game on info page
-                             "Click all the stars before they hit the bottom! \n"
-                             "But be careful, dont click other objects!", this);
+                             "Click the spaceship to be able to move it! \n"
+                             "Then, use WASD to dodge falling objects!", this);
     description->setStyleSheet("QLabel {color : yellow; }");
     description -> setGeometry(20,10,400,400);
     QFont paragraphFont("Times", 20, QFont::Cursive, true);
@@ -96,9 +96,9 @@ void Opening::handleStart(){
     hide_all();
     game_scene = new gameScene(this);
     game_view = new QGraphicsView(this);
-    game_view->setScene(game_scene);
+    game_view -> setScene(game_scene);
     this -> setCentralWidget(game_view);
-
+    game_scene->get_player()->setFocus();
 }
 
 void Opening::handleInfo(){
@@ -213,4 +213,8 @@ void Opening::reset(){
 
 QGraphicsView* Opening::get_view(){
     return game_view;
+}
+
+gameScene* Opening::get_scene(){
+    return game_scene;
 }
