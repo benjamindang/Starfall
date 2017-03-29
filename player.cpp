@@ -27,9 +27,15 @@ void Player::keyPressEvent(QKeyEvent *event){
             setPos(x(),y() + 20);
     }
     else if(event->key() == Qt::Key_D){
-        setPos(x() + 20,y());
+        if(x() >= 350)
+            return;
+        else
+            setPos(x() + 20,y());
     }
     else if(event->key() == Qt::Key_A){
-        setPos(x() - 20,y());
+        if(x() <= 0)
+            return;
+        else
+            setPos(x() - 20,y());
     }
 }
